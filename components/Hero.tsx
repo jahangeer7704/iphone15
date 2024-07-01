@@ -3,19 +3,24 @@ import React, { useEffect, useState } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 function Hero() {
-  const [dimension, setDimension] = useState(window.innerWidth)
+  const [dimension, setDimension] = useState(0)
   useGSAP(()=>{
 gsap.to("#hero",{opacity:1,delay:2,y:0})
 gsap.to("#amount",{opacity:1,delay:2,y:-10})
   },[])
   const screenWidth = () => {
+if(window!==undefined){
 
-    setDimension(window.innerWidth)
+  setDimension(window.innerWidth)
+}
   }
 
   useEffect(() => {
-    window.addEventListener("resize", screenWidth)
-    return () => window.removeEventListener("resize", screenWidth)
+    if(window !==undefined){
+
+      window.addEventListener("resize", screenWidth)
+      return () => window.removeEventListener("resize", screenWidth)
+    }
   }, [])
 
   return (

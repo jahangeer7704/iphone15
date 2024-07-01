@@ -8,7 +8,7 @@ function page() {
 
             <Navbar />
             <Hero />
-            <Highlight/>
+            <Highlight />
         </div>
 
 
