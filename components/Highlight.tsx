@@ -112,11 +112,11 @@ function Highlight() {
         if (!isFirstload) {
 
             videoRef.current[videoId]?.scrollIntoView({ behavior: 'smooth', inline: "center" })
+            setVideo(prev => ({ ...prev, isFirstload: false, isPlaying: true }))
         }
         pauseAllVideos();
         videoRef.current[videoId]?.play()
 
-        setVideo(prev => ({ ...prev, isFirstload: false, isPlaying: true }))
 
     }, [videoId])
     return (
@@ -136,10 +136,16 @@ function Highlight() {
                 {caroselData.map((list, i) => (
                     <div key={i} id="slider" className="sm:pr-20 pr-10 ">
                         <div className="relative w-[90vw] lg:w-[70vw] lg:h-[75vh] md:min-h-[65vh] h-[45vh]">
-                            <div className="w-full h-full flex justify-center items-center rounded-3xl overflow-hidden bg-black">
+                            <div className="w-full h-full flex justify-center items-center rounded-3xl overflow-hidden bg-black" onClick={restart}>
                                 <video
                                     playsInline={true}
                                     loop={false}
+                                    onPlay={
+                                        ()=>{
+            setVideo(prev => ({ ...prev, isFirstload: false, isPlaying: true }))
+
+                                        }
+                                    }
                                     onEnded={() => {
                                         console.log("call");
 
