@@ -52,7 +52,7 @@ function Highlight() {
                 videoId: 0,
                 isLastVideo: false,
                 isPause: false,
-                isFirstload: false,
+                isFirstload: true,
                 isEnd: false
             })
         }
@@ -90,7 +90,8 @@ function Highlight() {
 
             },
             opacity: 1, y: -10, duration: 1, stagger: 0.25,
-            ease: "power1.inOut"
+            ease: "power1.inOut",
+
 
         })
     }, [])
@@ -112,10 +113,12 @@ function Highlight() {
         if (!isFirstload) {
 
             videoRef.current[videoId]?.scrollIntoView({ behavior: 'smooth', inline: "center" })
-            setVideo(prev => ({ ...prev, isFirstload: false, isPlaying: true }))
+
+
         }
         pauseAllVideos();
         videoRef.current[videoId]?.play()
+
 
 
     }, [videoId])
@@ -141,8 +144,8 @@ function Highlight() {
                                     playsInline={true}
                                     loop={false}
                                     onPlay={
-                                        ()=>{
-            setVideo(prev => ({ ...prev, isFirstload: false, isPlaying: true }))
+                                        () => {
+                                            setVideo(prev => ({ ...prev, isFirstload: false, isPlaying: true }))
 
                                         }
                                     }
@@ -162,7 +165,7 @@ function Highlight() {
                                     }}
                                     className='scale-[1.35] lg:scale-150'
                                     preload={"auto"} ref={(e: any) => (videoRef!.current[i] = e)
-                                    } autoPlay src={list.vedio}></video>
+                                    } autoPlay={true} src={list.vedio}></video>
                             </div>
                             <div key={i + 3} className='absolute top-5 z-10 text-white text-lg sm:text-xl md:text-2xl font-semibold font-serif  left-5 '>
                                 {list.list.map((item, i) => (
@@ -182,7 +185,7 @@ function Highlight() {
                             key={index}
                             ref={(el: any) => indicatorRef.current[index] = el}
                             className={`h-2 cursor-pointer rounded-full w-2 block bg-gray-300 transition-all`}
-                            onClick={() => setVideo((prev) => ({ ...prev, videoId: index }))}
+                            onClick={() => setVideo((prev) => ({ ...prev, videoId: index,isFirstload:false }))}
                         ></span>
                     ))}
 

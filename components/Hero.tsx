@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import gsap from 'gsap'
 import { useWindowSize } from "@uidotdev/usehooks";
 import { useGSAP } from '@gsap/react'
@@ -9,7 +9,7 @@ function Hero() {
   useGSAP(() => {
     gsap.to("#hero", { opacity: 1, delay: 2, y: 0 })
     gsap.to("#amount", { opacity: 1, delay: 2, y: -10 })
-  }, [])
+  }, [dimension])
 
   if (dimension == null) {
     return (
@@ -27,8 +27,10 @@ function Hero() {
     </div>
 )
   }
-  else {
+
+  
     return (
+
       <section className='h-screen flex justify-center items-center flex-col gap-3 md:gap-y-16'>
         <h1 id="hero" className='text-[#A19C93] text-2xl font-bold opacity-0'>iPhone 15 Pro </h1>
         <div className='w-full flex justify-center' >
@@ -45,6 +47,6 @@ function Hero() {
 
   }
 
-}
+
 
 export default Hero
